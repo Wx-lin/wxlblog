@@ -32,5 +32,4 @@ const matched = computed(() => {
 
   return matched;
 });
-console.log(route.matched);
 </script>
