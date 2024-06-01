@@ -8,9 +8,18 @@
         <el-aside width="191px">
           <Aside />
         </el-aside>
-        <el-main style="padding: 0;">
+        <el-main style="padding: 0">
           <Breadcrumb />
-          <RouterView style="background-color: #f0f2f5;width: 100%;height: 100%;padding: 30px;box-sizing: border-box"/>
+          <div
+            style="
+              background-color: #f0f2f5;
+              width: 100%;
+              height: 100%;
+              padding: 30px;
+              box-sizing: border-box;
+            ">
+            <RouterView />
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -18,11 +27,10 @@
 </template>
 
 <script setup>
-import Header from '@/layout/components/Header.vue';
 import Aside from '@/layout/components/Aside.vue';
 import Breadcrumb from '@/layout/components/Breadcrumb.vue';
+import Header from '@/layout/components/Header.vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-
 </script>

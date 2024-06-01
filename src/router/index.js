@@ -74,7 +74,7 @@ const router = createRouter({
               path: '/monitor',
               name: 'monitor',
               meta: { name: '监控页' },
-              component: () => import('@/views/MonitorView.vue')
+              component: () => import('@/views/Monitor/index.vue')
             }
           ]
         },

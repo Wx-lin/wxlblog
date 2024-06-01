@@ -24,11 +24,11 @@
 
 <script setup>
 import menuList from '@/layout/config.js';
-import {useRouter} from "vue-router"
+import { useRouter } from 'vue-router';
 
-const router = useRouter()
+const router = useRouter();
 const handlerMenuClick = (path) => {
-  router.push(path)
+  router.push(path);
 };
 </script>
 
