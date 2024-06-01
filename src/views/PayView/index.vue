@@ -9,8 +9,16 @@
           <el-button size="large" icon="Search"></el-button>
         </el-col>
       </el-row>
-      <ProjectPriceTable />
-      <Shop />
+      <div class="common-layout">
+        <el-container>
+          <el-aside width="45%">
+            <ProjectPriceTable />
+          </el-aside>
+          <el-main>
+            <Shop />
+          </el-main>
+        </el-container>
+      </div>
     </el-card>
   </div>
 </template>
