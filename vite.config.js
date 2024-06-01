@@ -1,11 +1,11 @@
 import { fileURLToPath, URL } from 'node:url';
 
-import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import AutoImport from 'unplugin-auto-import/vite'; //加入这三条 配置自动导入vue
-import Components from 'unplugin-vue-components/vite';
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import path from 'path';
+import AutoImport from 'unplugin-auto-import/vite'; //加入这三条 配置自动导入vue
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import Components from 'unplugin-vue-components/vite';
+import { defineConfig } from 'vite';
 import { viteMockServe } from 'vite-plugin-mock';
 
 // eslint-disable-next-line no-undef
@@ -34,7 +34,7 @@ export default defineConfig({
     }),
     viteMockServe({
       mockPath: 'mock',
-      localEnbled: true,
+      localEnbled: isDev,
       prodEnabled: !isDev,
       supports: false,
       watchFiles: true,
@@ -43,7 +43,7 @@ export default defineConfig({
     setupProdMockServer();
     `,
       // eslint-disable-next-line no-undef
-      injectFile: path.resolve(process.cwd(), 'src/index.jsx')
+      injectFile: path.resolve(process.cwd(), 'src/main.js')
     })
   ],
   resolve: {
@@ -55,11 +55,11 @@ export default defineConfig({
     //配置代理服务器
     port: 5000,
     proxy: {
-      '/a': {
+      '/api': {
         target: 'http://123.56.141.187:3004/',
         changeOrigin: true,
         // 需要将当前/a从地址中去掉
-        rewrite: (path) => path.replace(/^\/a/, '')
+        rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
   }
