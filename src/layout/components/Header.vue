@@ -1,13 +1,14 @@
 <template>
-  <div class="header" style="height:48px;">
+  <div class="header" style="height: 48px">
     <div class="header-left">
-      <img src="../../assets/img/logo.png" alt="" width="30px" height="30px">
-      <a href="/">锋美CRM店铺管家 <span class="tag">智慧物联版</span></a>
+      <img src="../../assets/img/logo.png" alt="" width="30px" height="30px" />
+      <a href="/">
+        锋美CRM店铺管家
+        <span class="tag">智慧物联版</span>
+      </a>
     </div>
     <el-dropdown>
-      <span class="el-dropdown-link">
-        教主
-      </span>
+      <span class="el-dropdown-link">教主</span>
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item @click="clickHandler">退出登录</el-dropdown-item>
@@ -18,12 +19,12 @@
 </template>
 
 <script setup>
-import { useRouter } from "vue-router"
+import { useRouter } from 'vue-router';
 
-const router = useRouter()
+const router = useRouter();
 
 function clickHandler() {
-  router.push("/login")
+  router.push('/login');
 }
 </script>
 
@@ -59,6 +60,6 @@ function clickHandler() {
 
 .login-out {
   color: white;
-  text-decoration: none
+  text-decoration: none;
 }
 </style>
