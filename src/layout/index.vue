@@ -8,9 +8,9 @@
         <el-aside width="191px">
           <Aside />
         </el-aside>
-        <el-main>
+        <el-main style="padding: 0;">
           <Breadcrumb />
-          <RouterView />
+          <RouterView style="background-color: #f0f2f5;width: 100%;height: 100%;padding: 30px;box-sizing: border-box"/>
         </el-main>
       </el-container>
     </el-container>

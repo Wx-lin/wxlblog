@@ -14,7 +14,7 @@ const router = createRouter({
           path: '/pay',
           name: 'pay',
           meta: { name: '前台收银' },
-          component: () => import('@/views/PayView.vue')
+          component: () => import('@/views/PayView/index.vue')
         },
         {
           path: '/presale',

@@ -34,7 +34,7 @@ declare module 'vue' {
     MainView: typeof import('./src/views/MainView.vue')['default']
     MonitorView: typeof import('./src/views/MonitorView.vue')['default']
     OrderView: typeof import('./src/views/OrderView.vue')['default']
-    PayView: typeof import('./src/views/PayView.vue')['default']
+    PayView: typeof import('./src/views/PayView/index.vue')['default']
     PresaleView: typeof import('./src/views/PresaleView.vue')['default']
     ProductView: typeof import('./src/views/ProductView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

@@ -1,8 +1,8 @@
 <template>
-  <el-breadcrumb separator="/">
+  <el-breadcrumb separator="/" style="padding: 10px 20px 0;">
     <el-breadcrumb-item v-for="(item, index) in matched" >{{ item.name }}</el-breadcrumb-item>
   </el-breadcrumb>
-  <h2>{{ route.meta.name }}</h2>
+  <h2 style="padding-left: 20px;">{{ route.meta.name }}</h2>
 </template>
 
 <script setup>
