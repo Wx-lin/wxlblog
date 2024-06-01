@@ -35,6 +35,7 @@ declare module 'vue' {
     PayView: typeof import('./src/views/PayView/index.vue')['default']
     PresaleView: typeof import('./src/views/PresaleView.vue')['default']
     ProductView: typeof import('./src/views/ProductView.vue')['default']
+    ProjectPriceTable: typeof import('./src/views/PayView/ProjectPriceTable.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SalaryViews: typeof import('./src/views/SalaryViews.vue')['default']
