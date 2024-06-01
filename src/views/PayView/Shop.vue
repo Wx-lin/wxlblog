@@ -8,13 +8,9 @@
       <el-table-column label="友情价" prop="name" />
       <el-table-column label="小计" prop="name" />
       <el-table-column align="right">
-        <template #header>
-          操作
-        </template>
+        <template #header>操作</template>
         <template #default="scope">
-          <el-button size="small" type="danger" >
-            删除
-          </el-button>
+          <el-button size="small" type="danger">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -22,12 +18,12 @@
 </template>
 
 <script setup>
-const search = ref("")
-const shopList = reactive`([])
+const search = ref('');
+const shopList = reactive([]);
 </script>
 
 <style scoped>
-.shop-car{
+.shop-car {
   height: 45px;
   font-size: 18px;
   font-weight: 500;
