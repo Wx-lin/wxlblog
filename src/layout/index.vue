@@ -16,4 +16,5 @@
 
 <script setup>
 import Header from "@/layout/components/Header.vue"
+import Aside from "@/layout/components/Aside.vue"
 </script>
