@@ -35,7 +35,7 @@ const router = createRouter({
       children: [
         {
           path: "/index",
-          name: "index",
+          name: "userIndex",
           meta: { name: ["用户列表"] },
           component: () => import("@/views/UserListView.vue"),
         },
