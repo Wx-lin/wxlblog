@@ -1,16 +1,27 @@
 <template>
   <div>
-    <el-menu default-active="2" class="el-menu-vertical-demo">
-      <el-sub-menu index="1">
+    <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+      <el-sub-menu v-for="(item, key) in menuList" :key="key" :index="key + ''">
         <template #title>
-          <span>Navigator One</span>
+          <span> {{ item.meta.name }} </span>
         </template>
-        <el-menu-item index="1-1">item one</el-menu-item>
+        <el-menu-item v-for="(value, index) in item.children" :index="'' + key + '-' + index">{{ value.meta.name
+          }}</el-menu-item>
       </el-sub-menu>
     </el-menu>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import menuList from "@/layout/config.js"
+
+function handleOpen() {
+
+}
+
+function handleClose() {
+
+}
+</script>
 
 <style scoped></style>

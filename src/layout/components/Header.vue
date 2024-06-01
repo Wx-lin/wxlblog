@@ -5,24 +5,24 @@
       <a href="/">锋美CRM店铺管家 <span class="tag">智慧物联版</span></a>
     </div>
     <el-dropdown>
-    <span class="el-dropdown-link">
-      教主
-    </span>
-    <template #dropdown>
-      <el-dropdown-menu>
-        <el-dropdown-item @click="clickHandler">退出登录</el-dropdown-item>
-      </el-dropdown-menu>
-    </template>
-  </el-dropdown>
+      <span class="el-dropdown-link">
+        教主
+      </span>
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item @click="clickHandler">退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
   </div>
 </template>
 
 <script setup>
-import {useRouter} from "vue-router"
+import { useRouter } from "vue-router"
 
 const router = useRouter()
 
-function clickHandler(){
+function clickHandler() {
   router.push("/login")
 }
 </script>
@@ -35,10 +35,12 @@ function clickHandler(){
   display: flex;
   justify-content: space-between;
 }
-.el-dropdown-link{
+
+.el-dropdown-link {
   margin-top: 15px;
   color: white;
 }
+
 .header-left a {
   text-decoration: none;
   color: white;
@@ -54,7 +56,8 @@ function clickHandler(){
   left: 4px;
   position: relative;
 }
-.login-out{
+
+.login-out {
   color: white;
   text-decoration: none
 }
