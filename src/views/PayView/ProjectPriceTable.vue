@@ -8,42 +8,57 @@
       </div>
       <div>
         <p>会员名：</p>
-        <p>XXX</p>
-        <p>手机号：XXX</p>
+        <p>{{ datas.user_desc?.name }}</p>
+        <p>手机号：{{ datas.user_desc?.phone }}</p>
       </div>
       <div>
         <p>会员卡号：</p>
-        <p>232301200208099876</p>
-        <p>卡内余额：111.20</p>
+        <p>{{ datas.user_desc?.number }}</p>
+        <p>卡内余额：{{ datas.user_desc?.balance }}</p>
       </div>
     </div>
-    <el-scrollbar style="width: 450px;" height="400px">
-      <span>项目价格表</span>
-      <el-input
-        style="width: 155px; margin-left: 113px"
-        placeholder="请输入项目"
-        prefix-icon="Search"></el-input>
-      <el-button style="height: 30px" icon="Search"></el-button>
-
-      <el-table :data="tableData" height="450" style="width:100%">
-        <el-table-column prop="date" label="项目名称" width="165" />
-        <el-table-column prop="name" label="价格" width="165" />
-        <el-table-column prop="name" label="操作" width="165" >
-          <template #header>
-            操作
+    <div style="width: 100%; overflow-y: auto" height="100px">
+      <div class="search">
+        <span>项目价格表</span>
+        <el-input style="width: 255px" placeholder="请输入项目" prefix-icon="Search">
+          <template #append>
+            <el-button icon="Search" />
           </template>
-          
+        </el-input>
+      </div>
+
+      <el-table :data="tableData" style="width: 100%">
+        <el-table-column prop="project_name" label="项目名称" />
+        <el-table-column prop="price" label="价格" />
+        <el-table-column prop="name" label="操作">
+          <template #default="{ row }">
+            <el-button size="small" @click="handleAddShop(row)">+</el-button>
+          </template>
         </el-table-column>
       </el-table>
-    </el-scrollbar>
+    </div>
   </div>
 </template>
 
 <script setup>
-const tableData = ref([]);
+const props = defineProps({
+  datas: {
+    default: {},
+    required: true,
+    type: Object
+  }
+});
+const emit = defineEmits(['change']);
+
+const tableData = computed(() => props.datas.price_list);
+
+const handleAddShop = (row) => {
+  row = Object.assign(row, { limit: 1 });
+  emit('change', row);
+};
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
 .card {
   margin-top: 20px;
   display: flex;
@@ -77,5 +92,14 @@ div p {
 :deep(.el-button) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.search {
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>

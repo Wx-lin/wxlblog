@@ -12,10 +12,10 @@
       <div class="common-layout">
         <el-container>
           <el-aside width="45%">
-            <ProjectPriceTable />
+            <ProjectPriceTable :datas="datas" @change="handleProjectChange" />
           </el-aside>
           <el-main>
-            <Shop />
+            <Shop :shopList="shopList" />
           </el-main>
         </el-container>
       </div>
@@ -30,9 +30,23 @@ onMounted(() => {
   getProjectList();
 });
 
+const datas = ref({});
+const shopList = ref([]);
+
 const getProjectList = async () => {
-  const res = await getProject();
-  console.log('res', res);
+  try {
+    const { data, code } = await getProject();
+    if (code !== 200) {
+      return;
+    }
+
+    datas.value = data;
+    console.log('data', datas.value);
+  } catch (error) {}
+};
+
+const handleProjectChange = (row) => {
+  shopList.value.push(row);
 };
 </script>
 
