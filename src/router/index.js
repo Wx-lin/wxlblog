@@ -25,24 +25,24 @@ const router = createRouter({
         {
           path: '/user',
           name: 'user',
-          meta: { name: ['会员管理'] },
+          meta: { name: '会员管理' },
           children: [
             {
               path: '/index',
               name: 'userIndex',
-              meta: { name: ['用户列表'] },
+              meta: { name: '用户列表' },
               component: () => import('@/views/UserListView.vue')
             },
             {
               path: '/create',
               name: 'create',
-              meta: { name: ['用户创建'] },
+              meta: { name: '用户创建' },
               component: () => import('@/views/UserCreateView.vue')
             },
             {
               path: '/map',
               name: 'map',
-              meta: { name: ['地图分布'] },
+              meta: { name: '地图分布' },
               component: () => import('@/views/UserMapView.vue')
             }
           ]

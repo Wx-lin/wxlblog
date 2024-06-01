@@ -9,7 +9,7 @@
           <Aside />
         </el-aside>
         <el-main>
-          
+          <Breadcrumb />
           <RouterView />
         </el-main>
       </el-container>
@@ -20,9 +20,9 @@
 <script setup>
 import Header from '@/layout/components/Header.vue';
 import Aside from '@/layout/components/Aside.vue';
+import Breadcrumb from '@/layout/components/Breadcrumb.vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
-console.log(route);
 </script>

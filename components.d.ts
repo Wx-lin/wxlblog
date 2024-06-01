@@ -10,6 +10,8 @@ declare module 'vue' {
     AnalysisView: typeof import('./src/views/AnalysisView.vue')['default']
     CheckingView: typeof import('./src/views/CheckingView.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
+    ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
+    ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElContainer: typeof import('element-plus/es')['ElContainer']
