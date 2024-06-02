@@ -7,20 +7,18 @@
         </el-avatar>
       </div>
       <div>
-        <p>会员名：</p>
-        <p>{{ datas.user_desc?.name }}</p>
+        <p>会员名：{{ datas.user_desc?.name }}</p>
         <p>手机号：{{ datas.user_desc?.phone }}</p>
       </div>
       <div>
-        <p>会员卡号：</p>
-        <p>{{ datas.user_desc?.number }}</p>
+        <p>会员卡号：{{ datas.user_desc?.number }}</p>
         <p>卡内余额：{{ datas.user_desc?.balance }}</p>
       </div>
     </div>
     <div style="width: 100%; overflow-y: auto" height="100px">
       <div class="search">
         <span>项目价格表</span>
-        <el-input style="width: 255px" placeholder="请输入项目" prefix-icon="Search">
+        <el-input style="width: 255px;" placeholder="请输入项目" prefix-icon="Search">
           <template #append>
             <el-button icon="Search" />
           </template>
@@ -49,11 +47,9 @@ const props = defineProps({
   }
 });
 const emit = defineEmits(['change']);
-
 const tableData = computed(() => props.datas.price_list);
 
 const handleAddShop = (row) => {
-  row = Object.assign(row, { limit: 1 });
   emit('change', row);
 };
 </script>
@@ -101,5 +97,7 @@ div p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-right 0
+  padding-left 20px 
 }
 </style>

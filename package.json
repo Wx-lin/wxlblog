@@ -21,6 +21,7 @@
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "stylus": "^0.63.0",
+    "uuid": "^9.0.1",
     "vite-plugin-mock": "^3.0.2",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
