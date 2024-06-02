@@ -14,13 +14,13 @@ const router = createRouter({
           path: '/pay',
           name: 'pay',
           meta: { name: '前台收银' },
-          component: () => import('@/views/PayView/index.vue')
+          component: () => import('@/views/Pay/index.vue')
         },
         {
           path: '/presale',
           name: 'presale',
-          meta: { name: '预约列表' },
-          component: () => import('@/views/PresaleView.vue')
+          meta: { name: '预约管理' },
+          component: () => import('@/views/Presale/index.vue')
         },
         {
           path: '/user',
@@ -31,7 +31,7 @@ const router = createRouter({
               path: '/index',
               name: 'userIndex',
               meta: { name: '用户列表' },
-              component: () => import('@/views/UserListView.vue')
+              component: () => import('@/views/UserList/index.vue')
             },
             {
               path: '/create',

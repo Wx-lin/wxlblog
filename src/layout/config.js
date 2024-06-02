@@ -7,7 +7,7 @@ export default [
   {
     path: '/presale',
     name: 'presale',
-    meta: { name: '预约列表' }
+    meta: { name: '预约管理' }
   },
   {
     path: '/user',
