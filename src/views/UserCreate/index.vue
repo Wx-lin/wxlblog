@@ -4,7 +4,7 @@
       <template #header>
         <div class="card-header">
           <span style="font-size: 16px; font-weight: 600">用户创建</span>
-          <el-button @click="handlerClickReturn">返回</el-button>
+          <el-button @click="handlerClickPath">返回</el-button>
         </div>
       </template>
       <el-form style="max-width: 100%" :model="createUserData" :rules="rules" label-width="auto">
@@ -24,7 +24,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="地区:">
-          <el-button style="width: 90px; margin-left: 10px">地图选点</el-button>
+          <el-button style="width: 90px; margin-left: 10px" @click="handlerMap">地图选点</el-button>
         </el-form-item>
         <el-form-item>
           <el-button
@@ -41,7 +41,9 @@
 
 <script setup>
 import { getCreateUser } from '@/api/createUser.js';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const imageUrl = ref();
 const createUserData = reactive({
   card_number: '',
@@ -53,12 +55,21 @@ const rules = reactive({
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 });
 
-const handlerUserCreate = async() => {
-  const result = await getCreateUser(createUserData)
-  console.log(result)
+const handlerUserCreate = async () => {
+  const result = await getCreateUser(createUserData);
+  if (result.state == 201) {
+    handlerClickPath();
+  }
 };
 
-const handlerClickReturn = () => {};
+const handlerClickPath = () => {
+  router.push('/index');
+};
+
+const handlerMap = () => {
+  router.push('/map');
+
+};
 </script>
 
 <style scoped>
