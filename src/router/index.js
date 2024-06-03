@@ -37,7 +37,7 @@ const router = createRouter({
               path: '/create',
               name: 'create',
               meta: { name: '用户创建' },
-              component: () => import('@/views/UserCreateView.vue')
+              component: () => import('@/views/UserCreate/index.vue')
             },
             {
               path: '/map',

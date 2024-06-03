@@ -66,7 +66,7 @@ import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 const prop = defineProps(['userlist', 'total']);
-const emit = defineEmits(['change-page','edit-user-list']);
+const emit = defineEmits(['change-page','edit-user-list','check-change']);
 // 当前页数
 const pagenum = ref(1);
 // 默认每页页数
@@ -76,7 +76,7 @@ const background = ref(true);
 const editPenShow = ref(false);
 
 const handleSelectionChange = (row) => {
-console.log(row)
+  emit('check-change',row)
 };
 
 // 更改每页页数&更改页数
