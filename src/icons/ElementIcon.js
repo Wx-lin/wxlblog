@@ -1,4 +1,4 @@
-import {Edit,Menu,Search,User,Calendar,Delete,EditPen,UserFilled,Postcard,CreditCard} from '@element-plus/icons-vue'
+import {Edit,Menu,Search,User,Calendar,Delete,EditPen,UserFilled,Postcard,CreditCard,Plus} from '@element-plus/icons-vue'
 
 export default{
     Edit,
@@ -10,5 +10,6 @@ export default{
     EditPen,
     UserFilled,
     Postcard,
-    CreditCard
+    CreditCard,
+    Plus
 }

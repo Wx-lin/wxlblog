@@ -4,29 +4,35 @@
       <template #header>
         <div class="card-header">
           <span style="font-size: 16px; font-weight: 600">用户创建</span>
-          <el-button>返回</el-button>
+          <el-button @click="handlerClickReturn">返回</el-button>
         </div>
       </template>
-      <el-form
-        ref="ruleFormRef"
-        style="max-width: 600px"
-        :model="ruleForm"
-        status-icon
-        :rules="rules"
-        label-width="auto"
-        class="demo-ruleForm">
-        <el-form-item label="Password" prop="pass">
-          <el-input v-model="ruleForm.pass" type="password" autocomplete="off" />
+      <el-form style="max-width: 100%" :model="createUserData" :rules="rules" label-width="auto">
+        <el-form-item label="会员卡号:">
+          <el-input v-model="createUserData.card_number" style="height: 35px" />
         </el-form-item>
-        <el-form-item label="Confirm" prop="checkPass">
-          <el-input v-model="ruleForm.checkPass" type="password" autocomplete="off" />
+        <el-form-item label="用户名:" prop="username">
+          <el-input v-model="createUserData.username" style="height: 35px" />
         </el-form-item>
-        <el-form-item label="Age" prop="age">
-          <el-input v-model.number="ruleForm.age" />
+        <el-form-item label="密码:" prop="password">
+          <el-input v-model.number="createUserData.password" type="password" style="height: 35px" />
+        </el-form-item>
+        <el-form-item label="头像:">
+          <el-upload class="avatar-uploader" :show-file-list="true">
+            <img v-if="false" :src="imageUrl" class="avatar" />
+            <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="地区:">
+          <el-button style="width: 90px; margin-left: 10px">地图选点</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm(ruleFormRef)">Submit</el-button>
-          <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
+          <el-button
+            type="primary"
+            style="width: 80px; margin-top: 20px"
+            @click="handlerUserCreate">
+            立即创建
+          </el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -34,10 +40,41 @@
 </template>
 
 <script setup>
+import { getCreateUser } from '@/api/createUser.js';
 
+const imageUrl = ref();
+const createUserData = reactive({
+  card_number: '',
+  username: '',
+  password: ''
+});
+const rules = reactive({
+  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+});
+
+const handlerUserCreate = async() => {
+  const result = await getCreateUser(createUserData)
+  console.log(result)
+};
+
+const handlerClickReturn = () => {};
 </script>
 
 <style scoped>
+.avatar-uploader {
+  width: 100px;
+  height: 100px;
+  border: 1px #ccc dashed;
+  text-align: center;
+  line-height: 100px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+:deep(.el-card__body) {
+  padding-left: 40px;
+  padding-top: 25px;
+}
 .card-header {
   display: flex;
   justify-content: space-between;
