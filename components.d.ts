@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AnalysisView: typeof import('./src/views/AnalysisView.vue')['default']
     CheckingView: typeof import('./src/views/CheckingView.vue')['default']
+    EditPen: typeof import('./src/views/UserList/EditPen.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
@@ -40,6 +41,8 @@ declare module 'vue' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ElTag: typeof import('element-plus/es')['ElTag']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
     InventoryView: typeof import('./src/views/InventoryView.vue')['default']
     LoginView: typeof import('./src/views/LoginView.vue')['default']
     Monitor: typeof import('./src/views/Monitor/index.vue')['default']
