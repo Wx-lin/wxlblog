@@ -1,20 +1,24 @@
 <template>
   <div>
     <Search />
-    <UserTable />
+    <UserTable :userlist="userlist" :total="total" @change-page="getUserTableData" />
   </div>
 </template>
 
 <script setup>
 import Search from './Search.vue';
 import UserTable from './UserTable.vue';
-import {getUserList} from "@/api/userList.js"
+import { getUserList } from '@/api/userList.js';
 
-onBeforeMount(async ()=>{
-  const userList = await getUserList()
-})
+let userlist = ref([]);
+let total = ref();
+onBeforeMount(getUserTableData);
 
-
+async function getUserTableData(pagenum, pagesize) {
+  const tableList = await getUserList(pagenum, pagesize);
+  userlist.value = tableList.list;
+  total.value = tableList.total;
+}
 </script>
 
 <style scoped></style>

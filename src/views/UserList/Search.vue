@@ -18,6 +18,8 @@
               type="datetimerange"
               format="YYYY-MM-DD HH:mm:ss"
               date-format="YYYY/MM/DD ddd"
+              start-placeholder="开始时间"
+              end-placeholder="结束时间"
               time-format="A hh:mm:ss" />
           </el-form-item>
           <el-form-item>
