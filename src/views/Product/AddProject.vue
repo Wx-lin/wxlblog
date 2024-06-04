@@ -4,18 +4,21 @@
       v-model="show"
       title="产品创建"
       width="530"
-      style="border-radius: 10px; height: 300px; font-weight: 500;">
+      style="border-radius: 10px; height: 300px; font-weight: 500">
       <el-form :model="addProjectData" label-width="auto" style="max-width: 600px">
-        <el-form-item label="产品名称" style="margin-top: 15px;">
-          <el-input v-model="addProjectData.name" placeholder="请输入产品名称"/>
+        <el-form-item label="产品名称" style="margin-top: 15px">
+          <el-input v-model="addProjectData.title" placeholder="请输入产品名称" />
         </el-form-item>
         <el-form-item label="产品描述">
-          <el-input v-model="addProjectData.name"  placeholder="请输入产品名称"/>
+          <el-input v-model="addProjectData.info" placeholder="请输入产品名称" />
         </el-form-item>
         <el-form-item label="价格">
-          <el-input v-model="addProjectData.name" placeholder="请输入价格"/>
+          <el-input v-model="addProjectData.price" placeholder="请输入价格" />
         </el-form-item>
-        <el-button class="btn" @click="cardShow" style="margin-left: 10px; background-color: pink">
+        <el-button
+          class="btn"
+          @click="handlerAddProject"
+          style="margin-left: 10px; background-color: pink">
           确定
         </el-button>
         <el-button class="btn" @click="cardShow">取消</el-button>
@@ -26,11 +29,14 @@
 
 <script setup>
 const props = defineProps(['addProjectShoe']);
-const emit = defineEmits(['show-change']);
-const addProjectData = reactive({
-  name: ""
-});
+const emit = defineEmits(['show-change', 'add-project']);
 const show = ref(false);
+const addProjectData = reactive({
+  title: '',
+  info: '',
+  price: ''
+});
+
 watchEffect(() => {
   show.value = props.addProjectShoe;
 });
@@ -38,6 +44,11 @@ watchEffect(() => {
 const cardShow = () => {
   show.value = !show.value;
   emit('show-change', show.value);
+};
+
+const handlerAddProject = () => {
+  cardShow();
+  emit('add-project', addProjectData);
 };
 </script>
 

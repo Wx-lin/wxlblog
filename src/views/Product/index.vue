@@ -5,7 +5,10 @@
         <div class="card-header">
           <el-button class="btn" @click="addProjectShoe = true">新建</el-button>
           <div>
-            <AddProject v-model:addProjectShoe="addProjectShoe" @show-change="handlerShowChange" />
+            <AddProject
+              v-model:addProjectShoe="addProjectShoe"
+              @show-change="handlerShowChange"
+              @add-project="handlerAddProject" />
           </div>
         </div>
       </template>
@@ -18,7 +21,7 @@
 </template>
 
 <script setup>
-import { getProjrctList } from '@/api/productList.js';
+import { getProjrctList,getAddProjrct } from '@/api/productList.js';
 
 const addProjectShoe = ref(false);
 const projectData = ref([]);
@@ -32,7 +35,13 @@ async function getProjectList(params) {
 }
 
 const handlerShowChange = (show) => {
-  addProjectShoe.value = show
+  addProjectShoe.value = show;
+};
+
+const handlerAddProject = (addProjectData) => {
+  const result = getAddProjrct(addProjectData);
+  console.log(result)
+  getProjectList()
 };
 </script>
 

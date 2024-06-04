@@ -6,3 +6,11 @@ export const getProjrctList = (params) => {
     params
   });
 };
+
+export const getAddProjrct = (data) => {
+  return request({
+    url: '/product/create',
+    method:'post',
+    data
+  });
+};
