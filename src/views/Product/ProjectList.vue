@@ -22,9 +22,7 @@
 </template>
 
 <script setup>
-const props = defineProps(['Data','aa']);
-console.log(props.Data.value)
-console.log(aa.value)
+const props = defineProps(['projectData']);
 
 const handleSelectionChange = () => {};
 

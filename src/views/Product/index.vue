@@ -6,7 +6,7 @@
           <el-button class="btn">新建</el-button>
         </div>
       </template>
-      <ProjectList :Data="projectData" :aa="aa"/>
+      <ProjectList :projectData="projectData"/>
       <template #footer>
         <ProjectPage />
       </template>
@@ -17,13 +17,14 @@
 <script setup>
 import { getProjrctList } from '@/api/productList.js';
 
-const aa= ref(1)
-const projectData = reactive([1,2,3]);
+const projectData = ref([]);
 
 onBeforeMount(async () => {
   const result = await getProjrctList();
-  projectData.value = result.list;
+  projectData.value = result.list
+  console.log(projectData.value)
 });
+
 </script>
 
 <style scoped>
