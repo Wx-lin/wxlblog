@@ -6,9 +6,9 @@
           <el-button class="btn">新建</el-button>
         </div>
       </template>
-      <ProjectList :projectData="projectData"/>
+      <ProjectList :projectData="projectData" />
       <template #footer>
-        <ProjectPage />
+        <ProjectPage @change-page="getProjectList" :totalNum="totalNum"/>
       </template>
     </el-card>
   </div>
@@ -18,13 +18,14 @@
 import { getProjrctList } from '@/api/productList.js';
 
 const projectData = ref([]);
+const totalNum = ref()
+onBeforeMount(getProjectList);
 
-onBeforeMount(async () => {
-  const result = await getProjrctList();
-  projectData.value = result.list
-  console.log(projectData.value)
-});
-
+async function getProjectList(params) {
+  const result = await getProjrctList(params);
+  projectData.value = result.list;
+  totalNum.value = result.total
+}
 </script>
 
 <style scoped>
