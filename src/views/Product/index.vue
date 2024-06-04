@@ -3,12 +3,15 @@
     <el-card style="max-width: 100%">
       <template #header>
         <div class="card-header">
-          <el-button class="btn">新建</el-button>
+          <el-button class="btn" @click="addProjectShoe = true">新建</el-button>
+          <div>
+            <AddProject v-model:addProjectShoe="addProjectShoe" @show-change="handlerShowChange" />
+          </div>
         </div>
       </template>
       <ProjectList :projectData="projectData" />
       <template #footer>
-        <ProjectPage @change-page="getProjectList" :totalNum="totalNum"/>
+        <ProjectPage @change-page="getProjectList" :totalNum="totalNum" />
       </template>
     </el-card>
   </div>
@@ -17,15 +20,20 @@
 <script setup>
 import { getProjrctList } from '@/api/productList.js';
 
+const addProjectShoe = ref(false);
 const projectData = ref([]);
-const totalNum = ref()
+const totalNum = ref();
 onBeforeMount(getProjectList);
 
 async function getProjectList(params) {
   const result = await getProjrctList(params);
   projectData.value = result.list;
-  totalNum.value = result.total
+  totalNum.value = result.total;
 }
+
+const handlerShowChange = (show) => {
+  addProjectShoe.value = show
+};
 </script>
 
 <style scoped>
