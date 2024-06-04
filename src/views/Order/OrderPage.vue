@@ -3,7 +3,7 @@
     <el-pagination
       v-model:current-page="pagenum"
       v-model:page-size="pagesize"
-      :page-sizes="[10, 20, 30]"
+      :page-sizes="[10, 20, 30, 50, 100]"
       :background="false"
       layout="prev, pager, next,sizes"
       :total="total"
@@ -18,27 +18,27 @@ const emit = defineEmits(['change-page']);
 const pagenum = ref(1);
 // 默认每页页数
 const pagesize = ref(10);
-const total = ref(30);
-const props = defineProps(['totalNum']);
-function handlePageChange(){}
-// watch(
-//   props,
-//   () => {
-//     total.value = props.totalNum;
-//   },
-//   {
-//     deep: true,
-//     immediate:true
-//   }
-// );
-// watchEffect(() => {
-//   total.value = props.totalNum;
-// });
-// // 更改每页页数&更改页数
-// const handlePageChange = () => {
-//   console.log(pagenum.value, pagesize.vlaue);
-//   emit('change-page', { pagenum: pagenum.value, pagesize: pagesize.vlaue });
-// };
+const props = defineProps(['totalNum', 'total']);
+/*侦听
+watch(
+  props,
+  () => {
+    total.value = props.totalNum;
+  },
+  {
+    deep: true,
+    immediate:true
+  }
+);
+watchEffect(() => {
+  total.value = props.totalNum;
+});
+*/
+// 更改每页页数&更改页数
+const handlePageChange = () => {
+  console.log(pagenum.value, pagesize.value);
+  emit('change-page', { pagenum: pagenum.value, pagesize: pagesize.value });
+};
 </script>
 
 <style scoped>

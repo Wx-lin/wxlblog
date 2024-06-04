@@ -4,9 +4,9 @@
       <template #header>
         <div class="card-header">订单记录</div>
       </template>
-      <OrderTable :orderListData="orderListData"/>
+      <OrderTable :orderListData="orderListData" />
       <template #footer>
-        <OrderPage />
+        <OrderPage :total="total" @change-page="orderList" />
       </template>
     </el-card>
   </div>
@@ -16,13 +16,17 @@
 // 请求数据完成  已传递子组件
 import { getOrderList } from '@/api/orderList.js';
 
-const orderListData = ref([])
-onBeforeMount(orderList);
+const orderListData = ref();
+const total = ref();
 
-async function orderList() {
-  const result = await getOrderList();
-  orderListData.value = result.list
+orderList();
+async function orderList(params) {
+  const result = await getOrderList(params);
+  total.value = result.total;
+  orderListData.value = result.list;
 }
+
+
 </script>
 
 <style scoped>
