@@ -24,7 +24,9 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="地区:">
-          <el-button style="width: 90px; margin-left: 10px" @click="handlerMap">地图选点</el-button>
+          <el-button style="width: 90px; margin-left: 10px" @click="handlerMapClick">
+            地图选点
+          </el-button>
         </el-form-item>
         <el-form-item>
           <el-button
@@ -36,12 +38,14 @@
         </el-form-item>
       </el-form>
     </el-card>
+    <SiteSelect v-model="siteVisible" @change="handlerMapChange" />
   </div>
 </template>
 
 <script setup>
 import { getCreateUser } from '@/api/createUser.js';
 import { useRouter } from 'vue-router';
+import SiteSelect from './components/SiteSelect.vue';
 
 const router = useRouter();
 const imageUrl = ref();
@@ -66,10 +70,24 @@ const handlerClickPath = () => {
   router.push('/index');
 };
 
-const handlerMap = () => {
-  router.push('/map');
+// 地图选点相关
+const { siteVisible, handlerMapClick, handlerMapChange } = useSelectMap();
 
-};
+function useSelectMap() {
+  const siteVisible = ref(false);
+
+  const handlerMapClick = () => {
+    siteVisible.value = true;
+  };
+
+  const handlerMapChange = () => {};
+
+  return {
+    siteVisible,
+    handlerMapClick,
+    handlerMapChange
+  };
+}
 </script>
 
 <style scoped>
