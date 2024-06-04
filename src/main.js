@@ -8,6 +8,7 @@ import 'element-plus/dist/index.css'; //添加2
 import ElementIcon from '@/icons/ElementIcon';
 import piniaPresist from 'pinia-plugin-persistedstate';
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
+import "@/assets/stylus/main.styl";
 
 const app = createApp(App);
 for (const [key, component] of Object.entries(ElementIcon)) {

@@ -51,7 +51,10 @@ declare module 'vue' {
     PayView: typeof import('./src/views/PayView/index.vue')['default']
     Presale: typeof import('./src/views/Presale/index.vue')['default']
     PresaleView: typeof import('./src/views/PresaleView/index.vue')['default']
+    Product: typeof import('./src/views/Product/index.vue')['default']
     ProductView: typeof import('./src/views/ProductView.vue')['default']
+    ProjectList: typeof import('./src/views/Product/ProjectList.vue')['default']
+    ProjectPage: typeof import('./src/views/Product/ProjectPage.vue')['default']
     ProjectPriceTable: typeof import('./src/views/Pay/ProjectPriceTable.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -63,5 +66,6 @@ declare module 'vue' {
     UserList: typeof import('./src/views/UserList/index.vue')['default']
     UserMapView: typeof import('./src/views/UserMapView.vue')['default']
     UserTable: typeof import('./src/views/UserList/UserTable.vue')['default']
+    Views: typeof import('./src/views/index.vue')['default']
   }
 }

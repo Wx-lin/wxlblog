@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Index from '../layout/index.vue';
 import LoginView from '@/views/LoginView.vue';
+// import {useUserStore} from '@/stores/UserStore.js'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,6 +10,7 @@ const router = createRouter({
       path: '/',
       name: 'index',
       component: Index,
+      redirect:'/pay',
       children: [
         {
           path: '/pay',
@@ -51,7 +53,7 @@ const router = createRouter({
           path: '/product',
           name: 'product',
           meta: { name: '产品管理' },
-          component: () => import('@/views/ProductView.vue')
+          component: () => import('@/views/Product/index.vue')
         },
         {
           path: '/order',
@@ -120,6 +122,6 @@ const router = createRouter({
 //       return;
 //     }
 //   }
-//   next();
+//   // next();
 // })
 export default router;
