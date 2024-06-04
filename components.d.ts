@@ -30,6 +30,7 @@ declare module 'vue' {
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElLink: typeof import('element-plus/es')['ElLink']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
@@ -44,6 +45,9 @@ declare module 'vue' {
     InventoryView: typeof import('./src/views/InventoryView.vue')['default']
     LoginView: typeof import('./src/views/LoginView.vue')['default']
     Monitor: typeof import('./src/views/Monitor/index.vue')['default']
+    Order: typeof import('./src/views/Order/index.vue')['default']
+    OrderPage: typeof import('./src/views/Order/OrderPage.vue')['default']
+    OrderTable: typeof import('./src/views/Order/OrderTable.vue')['default']
     OrderView: typeof import('./src/views/OrderView.vue')['default']
     Pay: typeof import('./src/views/Pay/index.vue')['default']
     Presale: typeof import('./src/views/Presale/index.vue')['default']
@@ -61,5 +65,6 @@ declare module 'vue' {
     UserList: typeof import('./src/views/UserList/index.vue')['default']
     UserMapView: typeof import('./src/views/UserMapView.vue')['default']
     UserTable: typeof import('./src/views/UserList/UserTable.vue')['default']
+    Views: typeof import('./src/views/index.vue')['default']
   }
 }

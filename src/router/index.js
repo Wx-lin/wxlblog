@@ -59,7 +59,7 @@ const router = createRouter({
           path: '/order',
           name: 'order',
           meta: { name: '订单列表' },
-          component: () => import('@/views/OrderView.vue')
+          component: () => import('@/views/Order/index.vue')
         },
         {
           path: '/report',
