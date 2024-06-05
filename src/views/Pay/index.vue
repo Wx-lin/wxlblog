@@ -12,10 +12,17 @@
       <div class="common-layout">
         <el-container>
           <el-aside width="45%">
-            <ProjectPriceTable :datas="datas" @change="handleProjectChange" />
+            <ProjectPriceTable
+              :datas="datas"
+              @change="handleProjectChange"
+              :userName="userName"
+              @search="handlerSearch" />
           </el-aside>
           <el-main>
-            <Shop :shopList="shopList" @delete-shop-option="handlerDelOption" :totalPrice = "totalPrice"/>
+            <Shop
+              :shopList="shopList"
+              @delete-shop-option="handlerDelOption"
+              :totalPrice="totalPrice" />
           </el-main>
         </el-container>
       </div>
@@ -27,36 +34,36 @@
 </template>
 
 <script setup>
-import { getProject } from '@/api/project.js';
+import { getProject, getVipName } from '@/api/project.js';
 import { v4 as uuidv4 } from 'uuid';
+
+const datas = ref([]);
+const shopList = ref([]);
+const userName = ref([]);
 
 onMounted(() => {
   getProjectList();
+  getUserName();
 });
 
-const datas = ref({});
-const shopList = ref([]);
-
-const totalPrice = computed(()=>{
-  return shopList.value.reduce((sum,item)=>{
-    return sum + item.price
-  },0)
-})
+const totalPrice = computed(() => {
+  return shopList.value.reduce((sum, item) => {
+    return sum + item.price;
+  }, 0);
+});
 
 const getProjectList = async () => {
   try {
-    const { data, code } = await getProject();
-    if (code !== 200) {
+    const { list, state } = await getProject();
+    if (state !== 200) {
       return;
     }
-
-    datas.value = data;
+    datas.value = list;
   } catch (error) {}
 };
 
 const handleProjectChange = (row) => {
   shopList.value.push(row);
-
   shopList.value = shopList.value.map((v) => {
     return {
       ...v,
@@ -69,6 +76,17 @@ const handleProjectChange = (row) => {
 const handlerDelOption = (option) => {
   shopList.value = shopList.value.filter((item) => item.id !== option.id);
 };
+
+const getUserName = async () => {
+  const result = await getVipName();
+  userName.value = result.data.user_desc;
+};
+
+const handlerSearch = (searchData)=>{
+  if(searchData.value === '') getProjectList()
+  datas.value = datas.value.filter(item=>item.title === searchData.value.trim())
+}
+
 </script>
 
 <style scoped>

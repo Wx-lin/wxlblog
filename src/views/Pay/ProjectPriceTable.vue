@@ -7,26 +7,26 @@
         </el-avatar>
       </div>
       <div>
-        <p>会员名：{{ datas.user_desc?.name }}</p>
-        <p>手机号：{{ datas.user_desc?.phone }}</p>
+        <p>会员名：{{ userNameData?.name }}</p>
+        <p>手机号：{{ userNameData?.phone }}</p>
       </div>
       <div>
-        <p>会员卡号：{{ datas.user_desc?.number }}</p>
-        <p>卡内余额：{{ datas.user_desc?.balance }}</p>
+        <p>会员卡号：{{ userNameData?.number }}</p>
+        <p>卡内余额：{{ userNameData?.balance }}</p>
       </div>
     </div>
     <div style="width: 100%; overflow-y: auto" height="100px">
       <div class="search">
         <span>项目价格表</span>
-        <el-input style="width: 255px;" placeholder="请输入项目" prefix-icon="Search">
+        <el-input style="width: 255px;" v-model="search" placeholder="请输入项目" prefix-icon="Search">
           <template #append>
-            <el-button icon="Search" />
+            <el-button icon="Search" @click="handlerSearch"/>
           </template>
         </el-input>
       </div>
 
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="project_name" label="项目名称" />
+        <el-table-column prop="title" label="项目名称" />
         <el-table-column prop="price" label="价格" />
         <el-table-column prop="name" label="操作">
           <template #default="{ row }">
@@ -44,14 +44,26 @@ const props = defineProps({
     default: {},
     required: true,
     type: Object
+  },
+  userName: {
+    default: {},
+    required: true,
+    type: Object
   }
 });
-const emit = defineEmits(['change']);
-const tableData = computed(() => props.datas.price_list);
+const emit = defineEmits(['change','search']);
+const tableData = computed(() => props.datas);
+const userNameData = computed(() => props.userName);
+const search = ref('')
 
 const handleAddShop = (row) => {
   emit('change', row);
 };
+
+const handlerSearch = ()=>{
+  emit('search',search)
+  // console.log(search.value)
+}
 </script>
 
 <style scoped lang="stylus">

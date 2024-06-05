@@ -2,7 +2,7 @@
   <div>
     <div class="shop-car">购物车</div>
     <el-table :data="shopList" style="width: 100%;overflow-y: scroll;height: 600px;">
-      <el-table-column label="项目名" prop="project_name" />
+      <el-table-column label="项目名" prop="title" />
       <el-table-column label="数量" prop="limit" />
       <el-table-column label="单价" prop="price" />
       <el-table-column label="友情价" prop="price" />
