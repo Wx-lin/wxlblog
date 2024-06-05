@@ -9,6 +9,7 @@ import ElementIcon from '@/icons/ElementIcon';
 import piniaPresist from 'pinia-plugin-persistedstate';
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
 import "@/assets/stylus/main.styl";
+import 'default-passive-events'
 
 const app = createApp(App);
 for (const [key, component] of Object.entries(ElementIcon)) {
