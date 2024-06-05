@@ -1,6 +1,7 @@
 <template>
   <div>
     员工工资
+    <Page404/>
   </div>
 </template>
 

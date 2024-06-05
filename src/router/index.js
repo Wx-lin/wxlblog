@@ -45,7 +45,7 @@ const router = createRouter({
               path: '/map',
               name: 'map',
               meta: { name: '地图分布' },
-              component: () => import('@/views/UserMapView.vue')
+              component: () => import('@/views/UserMap/index.vue')
             }
           ]
         },
@@ -70,7 +70,7 @@ const router = createRouter({
               path: '/analysis',
               name: 'analysis',
               meta: { name: '分析页' },
-              component: () => import('@/views/AnalysisView.vue')
+              component: () => import('@/views/Analysis/index.vue')
             },
             {
               path: '/monitor',
@@ -84,23 +84,24 @@ const router = createRouter({
           path: '/inventory',
           name: 'inventory',
           meta: { name: '库存管理' },
-          component: () => import('@/views/InventoryView.vue')
+          component: () => import('@/views/Page404/InventoryView.vue')
         },
         {
           path: '/employee',
           name: 'employee',
+          meta:{name:'员工管理'},
           children: [
             {
               path: '/salary',
               name: 'salary',
               meta: { name: '员工工资' },
-              component: () => import('@/views/SalaryViews.vue')
+              component: () => import('@/views/Page404/SalaryViews.vue')
             },
             {
               path: '/checking',
               name: 'checking',
               meta: { name: '员工考勤' },
-              component: () => import('@/views/CheckingView.vue')
+              component: () => import('@/views/Page404/CheckingView.vue')
             }
           ]
         }

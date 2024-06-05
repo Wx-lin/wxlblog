@@ -20,13 +20,18 @@
           {{ getTotalPrice(row) }}
         </template>
       </el-table-column>
-      <el-table-column prop="pay_status" label="支付状态" width="180" align="center" />
+      <el-table-column  label="支付状态" width="180" align="center" >
+        <template #default="{row}">
+          <el-tag type="primary" v-if="row.pay_status === 1">已消费</el-tag>
+          <el-tag type="danger" v-else>未支付</el-tag>
+        </template>
+      </el-table-column>
       <el-table-column prop="created_at" label="创建于" width="250" align="center" />
       <el-table-column label="操作" width="190" fixed="right" align="center">
-        <template #default>
-          <el-link type="primary" style="margin-right: 5px">去支付</el-link>
+        <template #default="{row}">
+          <el-link type="primary" style="margin-right: 5px" :underline="false">去支付</el-link>
+          <el-button type="danger" icon="ShoppingBag" circle @click="changeShow(row)"></el-button>
           <el-button type="danger" icon="Delete" circle></el-button>
-          <el-button type="danger" icon="ShoppingBag" circle></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -34,19 +39,28 @@
 </template>
 
 <script setup>
-// let tableData = ref([]);
 const props = defineProps(['orderListData']);
+const emit = defineEmits(['change-show'])
+const show = ref(false)
 const handleSelectionChange = () => {};
-
-// watchEffect(() => {
-//   tableData.value = props.orderListData;
-// });
 
 function getTotalPrice(row){
   return row.detail.reduce((v,item)=>{
     return v+=(item.goods_number*item.market_price)
   },0)
 }
+
+const changeShow = (row)=>{
+  show.value = !show.value
+  emit('change-show',{show,row})
+  show.value = !show.value
+  
+}
+
+// watchEffect(() => {
+//   tableData.value = props.orderListData;
+// });
+
 // watch(
 //   () => props,
 //   () => {
