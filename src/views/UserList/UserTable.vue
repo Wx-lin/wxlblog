@@ -34,11 +34,11 @@
         <el-table-column prop="updated_at" label="更新于" width="200" align="center" />
         <el-table-column label="操作" fixed="right" width="280" class="operation">
           <template #default="{ row }">
-            <el-button type="danger" icon="EditPen" circle @click="emit('edit-user-list',row)"></el-button>
+            <el-button type="danger" icon="EditPen" circle @click="handlerEdit(row)"></el-button>
             <el-button type="danger" icon="UserFilled"></el-button>
             <el-button type="danger" icon="Postcard"></el-button>
             <el-button type="danger" icon="CreditCard"></el-button>
-            <el-button type="danger" icon="Delete" circle></el-button>
+            <el-button type="danger" icon="Delete" circle @click="handlerDel(row)"></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -66,7 +66,7 @@ import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 const prop = defineProps(['userlist', 'total']);
-const emit = defineEmits(['change-page','edit-user-list','check-change']);
+const emit = defineEmits(['change-page','edit-user-list','check-change','edit-user','delete-show']);
 // 当前页数
 const pagenum = ref(1);
 // 默认每页页数
@@ -88,6 +88,16 @@ const handlePageChange = () => {
 const onAddUser = () => {
   router.push('/create');
 };
+
+// 编辑用户点击事件
+const handlerEdit = (row)=>{
+  emit('edit-user',row)
+}
+
+// 删除用户点击事件
+const handlerDel = (row) =>{
+  emit('delete-show',row)
+}
 </script>
 
 <style scoped>

@@ -5,10 +5,17 @@
       :userlist="userlist"
       :total="total"
       @change-page="getUserTableData"
-      @edit-user-list="handlerEdit"
-      @check-change="handlerCheckChange" />
-    <EditPen v-model="editPenShow" :editUserData="editUserData" />
-    <el-card v-if="checkNum>0" class="check-bottom">
+      @check-change="handlerCheckChange"
+      @edit-user="handlerUserEdit"
+      @delete-show="handlerDel" />
+    <!-- 编辑 -->
+    <UserEditing
+      :userEdit="userEdit"
+      :editingShow="editingShow"
+      @editing-show="handlerCancelEdit" />
+    <!-- 删除 -->
+    <DeleteUser :userDelShow="userDelShow" @close-dialog="showDialog" @delete-user="delUserData"/>
+    <el-card v-if="checkNum > 0" class="check-bottom">
       <div>
         <p style="float: left">已选择 {{ checkNum }} 项，编号分别为：{{ checkSerialNum }}</p>
         <el-button class="btn">删除</el-button>
@@ -18,22 +25,23 @@
 </template>
 
 <script setup>
-import { assign } from 'lodash';
 import Search from './Search.vue';
 import UserTable from './UserTable.vue';
-import { getUserList } from '@/api/userList.js';
+import { getUserList,getDelUser } from '@/api/userList.js';
+import DeleteUser from './DeleteUser.vue';
 
 let userlist = ref([]);
 let total = ref();
-let editUserData = reactive({});
-const checkNum = ref(0)
-const checkSerialNum = ref("")
-
-
-const editPenShow = ref(false);
+const checkNum = ref(0);
+const checkSerialNum = ref('');
+const editingShow = ref(false);
+const userEdit = ref({});
+const userDelShow = ref(false);
+const userDelData = ref();
 
 onBeforeMount(getUserTableData);
 
+// 请求用户列表数据
 async function getUserTableData(params) {
   const tableList = await getUserList(params);
   userlist.value = tableList.list;
@@ -41,6 +49,7 @@ async function getUserTableData(params) {
   return tableList;
 }
 
+// 请求数据查询处理数据
 const getSearchData = async (searchData) => {
   const searchDataList = await getUserTableData({ username: searchData.username });
   userlist.value = searchDataList.list.filter(
@@ -50,18 +59,39 @@ const getSearchData = async (searchData) => {
   );
 };
 
-const handlerEdit = (row) => {
-  editPenShow.value = !editPenShow.value;
-  editUserData.value = assign(editUserData.value, row);
+// 多选底部显示
+const handlerCheckChange = (row) => {
+  checkNum.value = row.length;
+  checkSerialNum.value = row.reduce((str, item) => {
+    if (str === '') return str + item.user_id;
+    return str + ',' + item.user_id;
+  }, '');
 };
 
-const handlerCheckChange = (row) => {
-  checkNum.value = row.length
-  checkSerialNum.value = row.reduce((str,item)=>{
-    if(str==="") return str+item.user_id
-    return str+","+item.user_id
-  },"")
+// 编辑用户
+const handlerUserEdit = (row) => {
+  editingShow.value = true;
+  userEdit.value = row;
 };
+
+// 取消按钮
+const handlerCancelEdit = (val) => {
+  editingShow.value = val;
+};
+
+// 删除用户
+const handlerDel = (row) => {
+  userDelShow.value = true;
+  userDelData.value = row.user_id;
+};
+
+const showDialog = ()=>{
+  userDelShow.value = false
+}
+
+const delUserData = async()=>{
+  const result = await getDelUser(userDelData.value)
+}
 </script>
 
 <style scoped>
@@ -85,7 +115,7 @@ const handlerCheckChange = (row) => {
   overflow: hidden;
   text-wrap: nowrap;
   text-overflow: ellipsis;
-  font-weight: 500
+  font-weight: 500;
 }
 .check-bottom div button {
   margin-left: 44%;
