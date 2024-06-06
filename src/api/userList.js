@@ -6,6 +6,7 @@ export const getUserList = (params) => {
     params
   });
 };
+
 export const getDelUser = (params) => {
   return request({
     url: '/user/delete',
@@ -13,6 +14,7 @@ export const getDelUser = (params) => {
     params
   });
 };
+
 export const getEditUser = (params) => {
   return request({
     url: '/user/update',
@@ -20,6 +22,17 @@ export const getEditUser = (params) => {
     params
   });
 };
+
+export const getAssignRole = (params) => {
+  console.log("params",params)
+  return request({
+    url: '/user/assign',
+    method:'put',
+    params
+  });
+};
+
+
 // export function getDelUser(id){
 //   console.log(id)
 //   const result = request.delete('/user/delete'+id)

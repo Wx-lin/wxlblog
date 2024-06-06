@@ -35,7 +35,7 @@
         <el-table-column label="操作" fixed="right" width="280" class="operation">
           <template #default="{ row }">
             <el-button type="danger" icon="EditPen" circle @click="handlerEdit(row)"></el-button>
-            <el-button type="danger" icon="UserFilled"></el-button>
+            <el-button type="danger" icon="UserFilled" @click="handlerAssign(row)"></el-button>
             <el-button type="danger" icon="Postcard"></el-button>
             <el-button type="danger" icon="CreditCard"></el-button>
             <el-button type="danger" icon="Delete" circle @click="handlerDel(row)"></el-button>
@@ -66,7 +66,7 @@ import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 const prop = defineProps(['userlist', 'total']);
-const emit = defineEmits(['change-page','edit-user-list','check-change','edit-user','delete-show']);
+const emit = defineEmits(['change-page','edit-user-list','check-change','edit-user','delete-show','assign-show']);
 // 当前页数
 const pagenum = ref(1);
 // 默认每页页数
@@ -97,6 +97,11 @@ const handlerEdit = (row)=>{
 // 删除用户点击事件
 const handlerDel = (row) =>{
   emit('delete-show',row)
+}
+
+// 分配角色点击事件
+const handlerAssign = (row)=>{
+  emit('assign-show',row)
 }
 </script>
 

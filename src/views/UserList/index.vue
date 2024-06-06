@@ -7,7 +7,8 @@
       @change-page="getUserTableData"
       @check-change="handlerCheckChange"
       @edit-user="handlerUserEdit"
-      @delete-show="handlerDel" />
+      @delete-show="handlerDel"
+      @assign-show="handlerAssign" />
     <!-- 编辑 -->
     <UserEditing
       :userEdit="userEdit"
@@ -15,7 +16,13 @@
       @editing-show="handlerCancelEdit"
       @edit-data="handlerUserEditData" />
     <!-- 删除 -->
-    <DeleteUser :userDelShow="userDelShow" @close-dialog="showDialog" @delete-user="delUserData"/>
+    <DeleteUser :userDelShow="userDelShow" @close-dialog="showDialog" @delete-user="delUserData" />
+    <!-- 分配角色 -->
+    <AssignRole
+      :assginShow="assginShow"
+      :assginData="assginData"
+      @assgin-show="handlerAssignShow"
+      @assgin-data="handlerAssginData" />
     <el-card v-if="checkNum > 0" class="check-bottom">
       <div>
         <p style="float: left">已选择 {{ checkNum }} 项，编号分别为：{{ checkSerialNum }}</p>
@@ -28,7 +35,7 @@
 <script setup>
 import Search from './Search.vue';
 import UserTable from './UserTable.vue';
-import { getUserList,getDelUser ,getEditUser} from '@/api/userList.js';
+import { getUserList, getDelUser, getEditUser, getAssignRole } from '@/api/userList.js';
 import DeleteUser from './DeleteUser.vue';
 
 let userlist = ref([]);
@@ -39,8 +46,9 @@ const editingShow = ref(false);
 const userEdit = ref({});
 const userDelShow = ref(false);
 const userDelData = ref();
-const checkDelData = ref()
-
+const checkDelData = ref();
+const assginShow = ref(false);
+const assginData = ref();
 onBeforeMount(getUserTableData);
 
 // 请求用户列表数据
@@ -63,7 +71,7 @@ const getSearchData = async (searchData) => {
 
 // 多选底部显示
 const handlerCheckChange = (row) => {
-  checkDelData.value = row
+  checkDelData.value = row;
   checkNum.value = row.length;
   checkSerialNum.value = row.reduce((str, item) => {
     if (str === '') return str + item.user_id;
@@ -77,10 +85,14 @@ const handlerUserEdit = (row) => {
   userEdit.value = row;
 };
 
-const handlerUserEditData = async(data)=>{
-  console.log(data)
-  const result = await getEditUser({password:data.password,username:data.username,user_id:data}) 
-}
+const handlerUserEditData = async (data) => {
+  console.log(data);
+  const result = await getEditUser({
+    password: data.password,
+    username: data.username,
+    user_id: data
+  });
+};
 
 // 取消按钮
 const handlerCancelEdit = (val) => {
@@ -93,19 +105,36 @@ const handlerDel = (row) => {
   userDelData.value = row.user_id;
 };
 
-const showDialog = ()=>{
-  userDelShow.value = false
-}
+const showDialog = () => {
+  userDelShow.value = false;
+};
 
-const delUserData = async()=>{
-  const result = await getDelUser({user_id:userDelData.value})
-  getUserTableData()
-}
+const delUserData = async () => {
+  const result = await getDelUser({ user_id: userDelData.value });
+  getUserTableData();
+};
 
-const allDelUser = async ()=>{
-  const result = await getDelUser({user_id:checkSerialNum.value})
-  getUserTableData()
-}
+const allDelUser = async () => {
+  const result = await getDelUser({ user_id: checkSerialNum.value });
+  getUserTableData();
+};
+
+// 分配角色
+const handlerAssign = (row) => {
+  assginShow.value = true;
+  console.log(row);
+  assginData.value = row;
+};
+
+const handlerAssignShow = () => {
+  assginShow.value = false;
+};
+
+const handlerAssginData = async (data) => {
+  const result = await getAssignRole({ user_id: data.user_id+"", role_name: data.role_name });
+  console.log("result",result)
+  getUserTableData();
+};
 </script>
 
 <style scoped>
