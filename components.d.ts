@@ -76,5 +76,6 @@ declare module 'vue' {
     UserMapView: typeof import('./src/views/UserMapView.vue')['default']
     UserTable: typeof import('./src/views/UserList/UserTable.vue')['default']
     Views: typeof import('./src/views/index.vue')['default']
+    VipCard: typeof import('./src/views/UserList/VipCard.vue')['default']
   }
 }
