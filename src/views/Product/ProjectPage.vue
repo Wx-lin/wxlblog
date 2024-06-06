@@ -36,7 +36,6 @@ watchEffect(() => {
 })
 // 更改每页页数&更改页数
 const handlePageChange = () => {
-  console.log(pagenum.value,pagesize.value)
   emit('change-page',{pagenum:pagenum.value,pagesize:pagesize.value})
 };
 </script>

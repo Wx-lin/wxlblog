@@ -15,20 +15,19 @@ export const getDelUser = (params) => {
   });
 };
 
-export const getEditUser = (params) => {
+export const getEditUser = (data) => {
   return request({
     url: '/user/update',
-    method:'put',
-    params
+    method:'PUT',
+    data
   });
 };
 
-export const getAssignRole = (params) => {
-  console.log("params",params)
+export const getAssignRole = (data) => {
   return request({
     url: '/user/assign',
-    method:'put',
-    params
+    method:'PUT',
+    data
   });
 };
 

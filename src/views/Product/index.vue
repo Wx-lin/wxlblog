@@ -40,7 +40,6 @@ const handlerShowChange = (show) => {
 
 const handlerAddProject = (addProjectData) => {
   const result = getAddProjrct(addProjectData);
-  console.log(result)
   getProjectList()
 };
 </script>

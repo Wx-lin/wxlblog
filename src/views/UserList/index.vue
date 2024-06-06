@@ -86,11 +86,10 @@ const handlerUserEdit = (row) => {
 };
 
 const handlerUserEditData = async (data) => {
-  console.log(data);
   const result = await getEditUser({
     password: data.password,
     username: data.username,
-    user_id: data
+    user_id: data.user_id
   });
 };
 
@@ -122,7 +121,6 @@ const allDelUser = async () => {
 // 分配角色
 const handlerAssign = (row) => {
   assginShow.value = true;
-  console.log(row);
   assginData.value = row;
 };
 
@@ -131,8 +129,7 @@ const handlerAssignShow = () => {
 };
 
 const handlerAssginData = async (data) => {
-  const result = await getAssignRole({ user_id: data.user_id+"", role_name: data.role_name });
-  console.log("result",result)
+  const result = await getAssignRole(data={ user_id: data.user_id+"", role_name: data.role_name+"" });
   getUserTableData();
 };
 </script>
