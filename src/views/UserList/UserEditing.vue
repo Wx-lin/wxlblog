@@ -6,14 +6,14 @@
         :model="formData"
         label-width="auto">
         <el-form-item label="用户名:">
-          <el-input v-model="formData.card_number" style="height: 35px" />
+          <el-input v-model="formData.username" style="height: 35px" />
         </el-form-item>
         <el-form-item label="密码:" prop="username">
-          <el-input v-model="formData.username" style="height: 35px" />
+          <el-input v-model="formData.password" style="height: 35px" />
         </el-form-item>
         <el-form-item label="头像:">
           <el-upload class="avatar-uploader" :show-file-list="true">
-            <img v-if="false" :src="imageUrl" class="avatar" />
+            <img v-if="false" :src="formData.avatar" class="avatar" />
             <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
           </el-upload>
         </el-form-item>
@@ -35,7 +35,7 @@
             <el-button
               type="primary"
               style="width: 80px; margin-top: 35px"
-              @click="handlerUserCreate">
+              @click="handlerUserEdit">
               立即编辑
             </el-button>
           </div>
@@ -47,12 +47,12 @@
 
 <script setup>
 const props = defineProps(["editingShow",'userEdit']);
-const emit = defineEmits(['editing-show'])
+const emit = defineEmits(['editing-show','edit-data'])
 const show = ref(false);
 const imageUrl = ref();
 const formData = ref({
   username: '',
-  password: ''
+  password: '',
 });
 
 watchEffect(()=>{
@@ -68,8 +68,9 @@ const handlerCancelEdit = () => {
   show.value = false
   emit('editing-show',show.value)
 };
-const handlerUserCreate = () => {
-
+const handlerUserEdit = () => {
+  show.value = false
+  emit('edit-data',formData.value)
 };
 </script>
 

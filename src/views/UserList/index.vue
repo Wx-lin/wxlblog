@@ -12,13 +12,14 @@
     <UserEditing
       :userEdit="userEdit"
       :editingShow="editingShow"
-      @editing-show="handlerCancelEdit" />
+      @editing-show="handlerCancelEdit"
+      @edit-data="handlerUserEditData" />
     <!-- 删除 -->
     <DeleteUser :userDelShow="userDelShow" @close-dialog="showDialog" @delete-user="delUserData"/>
     <el-card v-if="checkNum > 0" class="check-bottom">
       <div>
         <p style="float: left">已选择 {{ checkNum }} 项，编号分别为：{{ checkSerialNum }}</p>
-        <el-button class="btn">删除</el-button>
+        <el-button class="btn" @click="allDelUser">删除</el-button>
       </div>
     </el-card>
   </div>
@@ -27,7 +28,7 @@
 <script setup>
 import Search from './Search.vue';
 import UserTable from './UserTable.vue';
-import { getUserList,getDelUser } from '@/api/userList.js';
+import { getUserList,getDelUser ,getEditUser} from '@/api/userList.js';
 import DeleteUser from './DeleteUser.vue';
 
 let userlist = ref([]);
@@ -38,6 +39,7 @@ const editingShow = ref(false);
 const userEdit = ref({});
 const userDelShow = ref(false);
 const userDelData = ref();
+const checkDelData = ref()
 
 onBeforeMount(getUserTableData);
 
@@ -61,6 +63,7 @@ const getSearchData = async (searchData) => {
 
 // 多选底部显示
 const handlerCheckChange = (row) => {
+  checkDelData.value = row
   checkNum.value = row.length;
   checkSerialNum.value = row.reduce((str, item) => {
     if (str === '') return str + item.user_id;
@@ -73,6 +76,11 @@ const handlerUserEdit = (row) => {
   editingShow.value = true;
   userEdit.value = row;
 };
+
+const handlerUserEditData = async(data)=>{
+  console.log(data)
+  const result = await getEditUser({password:data.password,username:data.username,user_id:data}) 
+}
 
 // 取消按钮
 const handlerCancelEdit = (val) => {
@@ -90,7 +98,13 @@ const showDialog = ()=>{
 }
 
 const delUserData = async()=>{
-  const result = await getDelUser(userDelData.value)
+  const result = await getDelUser({user_id:userDelData.value})
+  getUserTableData()
+}
+
+const allDelUser = async ()=>{
+  const result = await getDelUser({user_id:checkSerialNum.value})
+  getUserTableData()
 }
 </script>
 
