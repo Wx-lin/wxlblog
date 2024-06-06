@@ -10,7 +10,15 @@ export const getProjrctList = (params) => {
 export const getAddProjrct = (data) => {
   return request({
     url: '/product/create',
-    method:'post',
+    method: 'post',
     data
+  });
+};
+
+export const getDeleteProject = (params) => {
+  return request({
+    url: '/product/delete',
+    method: 'delete',
+    params
   });
 };

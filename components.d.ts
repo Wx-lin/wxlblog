@@ -12,6 +12,7 @@ declare module 'vue' {
     AnalysisView: typeof import('./src/views/AnalysisView.vue')['default']
     AssignRole: typeof import('./src/views/UserList/AssignRole.vue')['default']
     CheckingView: typeof import('./src/views/Page404/CheckingView.vue')['default']
+    DeleteProject: typeof import('./src/views/Product/DeleteProject.vue')['default']
     DeleteUser: typeof import('./src/views/UserList/DeleteUser.vue')['default']
     EditPen: typeof import('./src/views/UserList/EditPen.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']

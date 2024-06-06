@@ -12,20 +12,25 @@
           </div>
         </div>
       </template>
-      <ProjectList :projectData="projectData" />
+      <ProjectList :projectData="projectData" @delete-project="handlerDelData"/>
       <template #footer>
         <ProjectPage @change-page="getProjectList" :totalNum="totalNum" />
       </template>
     </el-card>
+    <DeleteProject :dialogDelShow="dialogDelShow" @close-dialog="dialogDelShow=false" @delete-project="handlerProject"/>
   </div>
 </template>
 
 <script setup>
-import { getProjrctList,getAddProjrct } from '@/api/productList.js';
+import { getProjrctList,getAddProjrct ,getDeleteProject} from '@/api/productList.js';
 
 const addProjectShoe = ref(false);
 const projectData = ref([]);
 const totalNum = ref();
+const dialogDelShow = ref(false)
+const delId = ref('')
+
+
 onBeforeMount(getProjectList);
 
 async function getProjectList(params) {
@@ -42,6 +47,17 @@ const handlerAddProject = (addProjectData) => {
   const result = getAddProjrct(addProjectData);
   getProjectList()
 };
+
+const handlerProject = async()=>{
+  dialogDelShow.value = false
+  const result = await getDeleteProject({product_id:delId.value})
+  getProjectList()
+}
+
+const handlerDelData = (row)=>{
+  delId.value = row.product_id
+  dialogDelShow.value = true
+}
 </script>
 
 <style scoped>
