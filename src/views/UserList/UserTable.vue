@@ -35,8 +35,8 @@
         <el-table-column label="操作" fixed="right" width="280" class="operation">
           <template #default="{ row }">
             <el-button type="danger" icon="EditPen" circle @click="handlerEdit(row)"></el-button>
-            <el-button type="danger" icon="UserFilled" @click="handlerAssign(row)"></el-button>
-            <el-button type="danger" icon="Postcard"></el-button>
+            <el-button type="danger" icon="UserFilled" @click="handlerAssign(row,'UserFilled')"></el-button>
+            <el-button type="danger" icon="Postcard"  @click="handlerAssign(row,'Postcard')"></el-button>
             <el-button type="danger" icon="CreditCard"></el-button>
             <el-button type="danger" icon="Delete" circle @click="handlerDel(row)"></el-button>
           </template>
@@ -100,8 +100,8 @@ const handlerDel = (row) =>{
 }
 
 // 分配角色点击事件
-const handlerAssign = (row)=>{
-  emit('assign-show',row)
+const handlerAssign = (row,type)=>{
+  emit('assign-show',{row:row,type:type})
 }
 </script>
 

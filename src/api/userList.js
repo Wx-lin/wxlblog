@@ -24,6 +24,7 @@ export const getEditUser = (data) => {
 };
 
 export const getAssignRole = (data) => {
+  console.log(data)
   return request({
     url: '/user/assign',
     method:'PUT',

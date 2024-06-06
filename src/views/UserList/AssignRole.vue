@@ -8,8 +8,11 @@
         <el-form-item label="当前用户:">
           <el-input v-model="formData.username" disabled style="height: 35px" />
         </el-form-item>
-        <el-form-item label="当前角色:" prop="username">
-          <el-input v-model="formData.role_name" style="height: 35px" />
+        <el-form-item label="当前角色:"  prop="username">
+          <el-input v-model="formData.role_name" :disabled="handoverShow==='Postcard'" style="height: 35px" />
+        </el-form-item>
+        <el-form-item label="会员卡号:" v-if="handoverShow==='Postcard'" prop="username">
+          <el-input v-model="formData.card_number" style="height: 35px" />
         </el-form-item>
         <el-form-item>
           <div calss="button-adr">
@@ -25,7 +28,7 @@
               type="primary"
               style="width: 80px; margin-top: 35px"
               @click="handlerUserEdit">
-              立即分配
+              {{handoverShow!=='Postcard'?"立即分配":"立即绑定"}}
             </el-button>
           </div>
         </el-form-item>
@@ -35,12 +38,13 @@
 </template>
 
 <script setup>
-const props = defineProps(["assginShow","assginData"]);
+const props = defineProps(["assginShow","assginData",'handoverShow']);
 const emit = defineEmits(['assgin-show','assgin-data'])
 const show = ref(false);
 const formData = ref({
   username: '',
   role_name: '',
+  card_number:''
 });
 
 watchEffect(()=>{
@@ -56,7 +60,7 @@ const handlerCancelEdit = () => {
 };
 const handlerUserEdit = () => {
   show.value = false
-  emit('assgin-data',formData.value)
+  emit('assgin-data',formData.value,props.handoverShow)
 };
 </script>
 

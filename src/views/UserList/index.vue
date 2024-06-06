@@ -22,7 +22,8 @@
       :assginShow="assginShow"
       :assginData="assginData"
       @assgin-show="handlerAssignShow"
-      @assgin-data="handlerAssginData" />
+      @assgin-data="handlerAssginData"
+      :handoverShow="handoverShow" />
     <el-card v-if="checkNum > 0" class="check-bottom">
       <div>
         <p style="float: left">已选择 {{ checkNum }} 项，编号分别为：{{ checkSerialNum }}</p>
@@ -49,6 +50,7 @@ const userDelData = ref();
 const checkDelData = ref();
 const assginShow = ref(false);
 const assginData = ref();
+const handoverShow = ref();
 onBeforeMount(getUserTableData);
 
 // 请求用户列表数据
@@ -119,17 +121,31 @@ const allDelUser = async () => {
 };
 
 // 分配角色
-const handlerAssign = (row) => {
+const handlerAssign = ({ row, type }) => {
   assginShow.value = true;
   assginData.value = row;
+  handoverShow.value = type;
 };
 
 const handlerAssignShow = () => {
   assginShow.value = false;
 };
 
-const handlerAssginData = async (data) => {
-  const result = await getAssignRole(data={ user_id: data.user_id+"", role_name: data.role_name+"" });
+const handlerAssginData = async (data, handoverShow) => {
+  console.log(handoverShow)
+  if (handoverShow === 'UserFilled') {
+    const result = await getAssignRole(
+      (data = { user_id: data.user_id + '', role_name: data.role_name + '' })
+    );
+  } else {
+    const result = await getEditUser(
+      (data = {
+        user_id: data.user_id + '',
+        role_name: data.role_name + '',
+        card_number: data.card_number + ''
+      })
+    );
+  }
   getUserTableData();
 };
 </script>
