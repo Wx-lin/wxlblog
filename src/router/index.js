@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Index from '../layout/index.vue';
 import LoginView from '@/views/LoginView.vue';
-// import {useUserStore} from '@/stores/UserStore.js'
+import { useUserStore } from '@/stores/UserStore.js';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,7 +10,7 @@ const router = createRouter({
       path: '/',
       name: 'index',
       component: Index,
-      redirect:'/pay',
+      redirect: '/pay',
       children: [
         {
           path: '/pay',
@@ -89,7 +89,7 @@ const router = createRouter({
         {
           path: '/employee',
           name: 'employee',
-          meta:{name:'员工管理'},
+          meta: { name: '员工管理' },
           children: [
             {
               path: '/salary',
@@ -115,14 +115,16 @@ const router = createRouter({
     }
   ]
 });
-// router.beforeEach((to, from, next) => {
-//   if (!to.meta.login) {
-//     const store = useUserStore();
-//     if (!store.username || !store.user.token) {
-//       router.replace("/login");
-//       return;
-//     }
-//   }
-//   // next();
-// })
+
+router.beforeEach((to, from, next) => {
+  console.log(to);
+  if (to.path !== '/login') {
+    const store = useUserStore();
+    if (!store.user || !store.user.token) {
+      router.push("/login");
+      return;
+    }
+  }
+  next();
+});
 export default router;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div> 
     <el-card style="max-width: 100%">
       <template #header>
         <div class="card-header">
@@ -29,7 +29,6 @@ const projectData = ref([]);
 const totalNum = ref();
 const dialogDelShow = ref(false)
 const delId = ref('')
-
 
 onBeforeMount(getProjectList);
 

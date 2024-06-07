@@ -15,6 +15,7 @@ declare module 'vue' {
     DeleteProject: typeof import('./src/views/Product/DeleteProject.vue')['default']
     DeleteUser: typeof import('./src/views/UserList/DeleteUser.vue')['default']
     EditPen: typeof import('./src/views/UserList/EditPen.vue')['default']
+    ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']

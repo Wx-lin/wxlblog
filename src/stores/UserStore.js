@@ -1,7 +1,7 @@
 import { reactive } from 'vue'
 import { defineStore } from 'pinia'
 export const useUserStore = defineStore('user', () => {
-  const user = reactive({})
+  const user = reactive({username:"",token:""})
     function logout(){
         user.token="";
         user.username="";
