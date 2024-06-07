@@ -49,6 +49,7 @@ const cardShow = () => {
 const handlerAddProject = () => {
   cardShow();
   emit('add-project', addProjectData);
+  (addProjectData.title = ''), (addProjectData.info = ''), (addProjectData.price = '');
 };
 </script>
 
