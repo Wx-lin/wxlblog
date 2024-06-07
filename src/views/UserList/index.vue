@@ -51,10 +51,12 @@ const checkDelData = ref();
 const assginShow = ref(false);
 const assginData = ref();
 const handoverShow = ref();
+const page = ref()
 onBeforeMount(getUserTableData);
 
 // 请求用户列表数据
 async function getUserTableData(params) {
+  page.value = params
   const tableList = await getUserList(params);
   userlist.value = tableList.list;
   total.value = tableList.total;
@@ -109,15 +111,15 @@ const handlerDel = (row) => {
 const showDialog = () => {
   userDelShow.value = false;
 };
-
+// 删除单个用户
 const delUserData = async () => {
   const result = await getDelUser({ user_id: userDelData.value });
   getUserTableData();
 };
-
+// 删除多个用户
 const allDelUser = async () => {
   const result = await getDelUser({ user_id: checkSerialNum.value });
-  getUserTableData();
+  getUserTableData(page.value);
 };
 
 // 分配角色

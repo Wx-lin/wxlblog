@@ -1,6 +1,11 @@
 <template>
   <div>
-    <el-dialog v-model="show" title="用户编辑" width="550" style="border-radius: 20px" @close="handlerCancelEdit">
+    <el-dialog
+      v-model="show"
+      title="用户编辑"
+      width="550"
+      style="border-radius: 20px"
+      @close="handlerCancelEdit">
       <el-form
         style="max-width: 100%; padding-left: 20px; padding-top: 20px"
         :model="formData"
