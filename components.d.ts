@@ -9,13 +9,10 @@ declare module 'vue' {
   export interface GlobalComponents {
     AddProject: typeof import('./src/views/Product/AddProject.vue')['default']
     Analysis: typeof import('./src/views/Analysis/index.vue')['default']
-    AnalysisView: typeof import('./src/views/AnalysisView.vue')['default']
     AssignRole: typeof import('./src/views/UserList/AssignRole.vue')['default']
     CheckingView: typeof import('./src/views/Page404/CheckingView.vue')['default']
     DeleteProject: typeof import('./src/views/Product/DeleteProject.vue')['default']
     DeleteUser: typeof import('./src/views/UserList/DeleteUser.vue')['default']
-    EditPen: typeof import('./src/views/UserList/EditPen.vue')['default']
-    ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
@@ -75,9 +72,6 @@ declare module 'vue' {
     UserEditing: typeof import('./src/views/UserList/UserEditing.vue')['default']
     UserList: typeof import('./src/views/UserList/index.vue')['default']
     UserMap: typeof import('./src/views/UserMap/index.vue')['default']
-    UserMapView: typeof import('./src/views/UserMapView.vue')['default']
     UserTable: typeof import('./src/views/UserList/UserTable.vue')['default']
-    Views: typeof import('./src/views/index.vue')['default']
-    VipCard: typeof import('./src/views/UserList/VipCard.vue')['default']
   }
 }
